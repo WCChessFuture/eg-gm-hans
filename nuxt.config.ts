@@ -27,7 +27,9 @@ export default defineNuxtConfig({
         { name: 'twitter:description', content: 'From Sinquefield Cup to Endgame.ai. The story of GM Hans Niemann and the chess platform he built.' },
       ],
       link: [
+        { rel: 'icon', type: 'image/png', href: '/favicon-96x96.png', sizes: '96x96' },
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
+        { rel: 'shortcut icon', href: '/favicon.ico' },
         { rel: 'canonical', href: 'https://hansniemann.com' },
       ],
       script: [
