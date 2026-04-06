@@ -40,7 +40,7 @@ jobs:
           path: .output/public
 
   deploy-s3-test:
-    name: Deploy to S3 (test account)
+    name: Deploy to S3 + invalidate CF (test)
     needs: build-s3
     runs-on: ubuntu-latest
     steps:
@@ -57,8 +57,11 @@ jobs:
 
       - run: aws s3 sync public s3://eg-gm-hans-static/gmhans --delete
 
+      - name: Invalidate CloudFront cache
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CF_DISTRIBUTION_ID_TEST }} --paths "/gmhans/*" "/gmhans"
+
   deploy-s3-prod:
-    name: Deploy to S3 (prod account)
+    name: Deploy to S3 + invalidate CF (prod)
     needs: build-s3
     runs-on: ubuntu-latest
     steps:
@@ -74,3 +77,6 @@ jobs:
           aws-region: us-east-1
 
       - run: aws s3 sync public s3://eg-gm-hans-static-prod/gmhans --delete
+
+      - name: Invalidate CloudFront cache
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CF_DISTRIBUTION_ID_PROD }} --paths "/gmhans/*" "/gmhans"
