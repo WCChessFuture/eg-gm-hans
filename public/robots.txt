@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hansniemann.com/sitemap.xml
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /

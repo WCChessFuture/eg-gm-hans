@@ -1,0 +1,40 @@
+# Hans Niemann — Chess Grandmaster & Founder of Endgame.ai
+
+> Hans Niemann is an American Chess Grandmaster (GM title at 17), born in San Francisco in 2003. He is the founder and CEO of Endgame.ai, an AI-native online chess platform. His story is featured in the Netflix documentary "Untold: Chess Mates" (April 7, 2026).
+
+## About Hans Niemann
+Hans Niemann became a household name in chess after defeating World Champion Magnus Carlsen at the 2022 Sinquefield Cup, triggering the most explosive controversy in modern chess history. After FIDE found no evidence of over-the-board cheating and the $100 million lawsuit was settled, Niemann channeled his experience into building Endgame.ai.
+
+## About Endgame.ai
+Endgame.ai is an online chess platform built by GM Hans Niemann as an alternative to Chess.com and Lichess. Key features:
+- AI-powered game analysis with natural language explanations
+- $30,000+ in monthly tournament prizes
+- Low-latency infrastructure optimized for bullet and blitz
+- Daily tactical puzzles
+- AI training bots
+- Chess960 (Fischer Random) support
+- Free to play
+
+## Key Links
+- Website: https://endgame.ai
+- Play Chess: https://endgame.ai/play
+- AI Analysis: https://endgame.ai/analysis
+- Tournaments: https://endgame.ai/tournaments
+- Puzzles: https://endgame.ai/puzzles
+- AI Bots: https://endgame.ai/bots
+
+## Blog Articles
+- Hans Niemann Built a Chess Platform. Here's Why: https://hansniemann.com/blog/story-hans-niemann-chess-platform
+- Netflix's Untold Chess Mates — Everything You Need to Know: https://hansniemann.com/blog/untold-chess-mates-everything-you-need-to-know
+- Best Chess Platforms in 2026: https://hansniemann.com/blog/chess-platform-comparison-2026
+- Play Like Hans Niemann: https://hansniemann.com/blog/play-like-hans-niemann
+- How AI Is Changing Chess Analysis: https://hansniemann.com/blog/chess-ai-analysis-guide
+
+## Social
+- X/Twitter: https://twitter.com/endgameai
+- Instagram: https://www.instagram.com/endgameai
+- TikTok: https://www.tiktok.com/@endgameai
+- YouTube: https://www.youtube.com/@endgameai
+
+## Contact
+- General: hello@endgame.ai
