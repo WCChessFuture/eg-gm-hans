@@ -9,6 +9,7 @@
     <BioSection />
     <BlogPreviewSection />
     <CtaSection />
+    <VideoSection />
   </div>
 </template>
 

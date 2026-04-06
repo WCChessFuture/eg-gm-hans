@@ -31,17 +31,16 @@
         </div>
 
         <div class="relative">
-          <div class="aspect-video bg-elevated rounded-2xl border border-white/10 flex items-center justify-center relative overflow-hidden group">
-            <div class="absolute inset-0 bg-gradient-to-br from-accent-pink/10 via-transparent to-primary/10" />
-            <div class="relative text-center p-8">
-              <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
-                <div class="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
-                <span class="text-xs font-medium text-white uppercase tracking-wider">Netflix</span>
-              </div>
-              <h3 class="text-2xl md:text-3xl font-bold text-white mb-2">UNTOLD</h3>
-              <p class="text-lg text-text-secondary font-display italic">Chess Mates</p>
-              <p class="text-sm text-accent-pink mt-4 font-medium">Premieres April 7, 2026</p>
-            </div>
+          <div class="aspect-video rounded-2xl border border-white/10 overflow-hidden shadow-2xl shadow-accent-pink/5">
+            <iframe
+              src="https://www.youtube.com/embed/4k7lkMdZorE?rel=0"
+              title="Untold: Chess Mates — Netflix Trailer"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              class="w-full h-full"
+              loading="lazy"
+            ></iframe>
           </div>
 
           <div class="mt-8 grid grid-cols-2 gap-4">
