@@ -39,7 +39,7 @@
       <div class="mt-12 p-8 rounded-2xl bg-surface border border-white/10 flex flex-col md:flex-row items-center gap-6">
         <div class="flex-1 text-center md:text-left">
           <a href="https://endgame.ai" target="_blank" rel="noopener" class="inline-block mb-3">
-            <img src="/img/endgame-logo.svg" alt="Endgame.ai" class="h-6" />
+            <img :src="assetUrl('/img/endgame-logo.svg')" alt="Endgame.ai" class="h-6" />
           </a>
           <p class="text-text-secondary text-sm">
             The AI-native chess platform built by GM Hans Niemann. Play, analyze, and compete for $30K+ monthly.
@@ -54,6 +54,8 @@
 </template>
 
 <script setup>
+const { assetUrl } = useBaseUrl()
+
 useHead({
   title: 'Blog — Hans Niemann & Endgame.ai',
   meta: [
@@ -67,35 +69,35 @@ const posts = [
     title: "Hans Niemann Built a Chess Platform. Here's Why.",
     description: 'The story of how GM Hans Niemann went from the most controversial figure in modern chess to building Endgame.ai.',
     date: 'March 28, 2026',
-    image: '/img/hans-niemann-sinquefield.jpg',
+    image: assetUrl('/img/hans-niemann-sinquefield.jpg'),
   },
   {
     slug: 'untold-chess-mates-everything-you-need-to-know',
     title: "Netflix's Untold: Chess Mates — Everything You Need to Know",
     description: 'The full story of the Carlsen-Niemann controversy. Premiering April 7, 2026 on Netflix.',
     date: 'March 30, 2026',
-    image: '/img/netflix-chess.jpg',
+    image: assetUrl('/img/netflix-chess.jpg'),
   },
   {
     slug: 'chess-platform-comparison-2026',
     title: 'Best Chess Platforms in 2026: Endgame.ai vs Chess.com vs Lichess',
     description: 'An honest comparison of the three major chess platforms — features, pricing, AI analysis, and more.',
     date: 'March 31, 2026',
-    image: '/img/chess-platform.jpg',
+    image: assetUrl('/img/chess-platform.jpg'),
   },
   {
     slug: 'play-like-hans-niemann',
     title: 'Play Like Hans Niemann: AI Analysis of His Playing Style',
     description: "A deep dive into Niemann's aggressive chess style, favorite openings, notable games, and practical tips.",
     date: 'April 1, 2026',
-    image: '/img/chess-style.jpg',
+    image: assetUrl('/img/chess-style.jpg'),
   },
   {
     slug: 'chess-ai-analysis-guide',
     title: 'How AI Is Changing Chess Analysis (And How to Use It Free)',
     description: 'From Stockfish to neural networks to cloud AI. The complete guide to modern chess analysis tools.',
     date: 'April 1, 2026',
-    image: '/img/chess-ai-analysis.jpg',
+    image: assetUrl('/img/chess-ai-analysis.jpg'),
   },
 ]
 </script>

@@ -63,7 +63,7 @@
 
         <div class="flex flex-col items-center justify-center">
           <div class="w-64 h-64 md:w-80 md:h-80 rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-accent-orange/5 mb-8">
-            <img src="/img/hans-hero.png" alt="Hans Niemann" class="w-full h-full object-cover" />
+            <img :src="assetUrl('/img/hans-hero.png')" alt="Hans Niemann" class="w-full h-full object-cover" />
           </div>
           <div class="text-center space-y-4">
             <a href="https://endgame.ai/analysis" target="_blank" rel="noopener" class="inline-flex items-center justify-center px-8 py-3 rounded-full bg-accent-orange text-black font-semibold text-sm hover:bg-accent-orange/80 transition-all duration-200 w-full max-w-xs">
@@ -78,3 +78,7 @@
     </div>
   </section>
 </template>
+
+<script setup>
+const { assetUrl } = useBaseUrl()
+</script>

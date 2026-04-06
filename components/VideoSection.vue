@@ -9,9 +9,13 @@
           loop
           playsinline
         >
-          <source src="/img/hans-endgame-promo.mp4" type="video/mp4" />
+          <source :src="assetUrl('/img/hans-endgame-promo.mp4')" type="video/mp4" />
         </video>
       </div>
     </div>
   </section>
 </template>
+
+<script setup>
+const { assetUrl } = useBaseUrl()
+</script>

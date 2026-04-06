@@ -45,27 +45,29 @@
 </template>
 
 <script setup>
+const { assetUrl } = useBaseUrl()
+
 const posts = [
   {
     slug: 'untold-chess-mates-everything-you-need-to-know',
     title: "Netflix's Untold: Chess Mates — Everything You Need to Know",
     excerpt: 'The full story of the Carlsen-Niemann controversy. Premiering April 7, 2026 on Netflix.',
     date: 'March 30, 2026',
-    image: '/img/netflix-chess.jpg',
+    image: assetUrl('/img/netflix-chess.jpg'),
   },
   {
     slug: 'play-like-hans-niemann',
     title: 'Play Like Hans Niemann: AI Analysis of His Playing Style',
     excerpt: "A deep dive into Niemann's aggressive chess style, favorite openings, and notable games.",
     date: 'April 1, 2026',
-    image: '/img/chess-style.jpg',
+    image: assetUrl('/img/chess-style.jpg'),
   },
   {
     slug: 'chess-ai-analysis-guide',
     title: 'How AI Is Changing Chess Analysis (And How to Use It Free)',
     excerpt: 'From Stockfish to neural networks to cloud-based AI. The complete guide to modern chess analysis tools.',
     date: 'April 1, 2026',
-    image: '/img/chess-ai-analysis.jpg',
+    image: assetUrl('/img/chess-ai-analysis.jpg'),
   },
 ]
 </script>

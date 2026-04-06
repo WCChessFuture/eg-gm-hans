@@ -27,7 +27,7 @@
 
         <div class="my-16 p-8 rounded-2xl bg-gradient-to-r from-primary/10 via-surface to-accent-pink/10 border border-white/10 text-center">
           <a href="https://endgame.ai" target="_blank" rel="noopener" class="inline-block mb-4 hover:opacity-80 transition-opacity">
-            <img src="/img/endgame-logo.svg" alt="Endgame.ai" class="h-8 mx-auto" />
+            <img :src="assetUrl('/img/endgame-logo.svg')" alt="Endgame.ai" class="h-8 mx-auto" />
           </a>
           <p class="text-text-secondary text-sm mb-5 max-w-md mx-auto">
             Play chess, analyze games with AI, solve puzzles, and compete for $30K+ monthly prizes. Free to play.
@@ -49,7 +49,7 @@
           <div class="card p-8 md:p-10">
             <div class="flex flex-col md:flex-row items-center gap-6">
               <div class="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 border border-white/10">
-                <img src="/img/hans-profile.png" alt="Hans Niemann" class="w-full h-full object-cover" />
+                <img :src="assetUrl('/img/hans-profile.png')" alt="Hans Niemann" class="w-full h-full object-cover" />
               </div>
               <div class="text-center md:text-left flex-1">
                 <h3 class="text-lg font-semibold text-white mb-1">Built by GM Hans Niemann</h3>
@@ -77,6 +77,7 @@
 </template>
 
 <script setup>
+const { assetUrl } = useBaseUrl()
 const route = useRoute()
 const slug = String(route.params.slug)
 

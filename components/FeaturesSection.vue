@@ -4,7 +4,7 @@
       <div class="text-center mb-16">
         <p class="section-subheading mb-4">The Platform</p>
         <a href="https://endgame.ai" target="_blank" rel="noopener" class="inline-block mb-8 hover:opacity-80 transition-opacity">
-          <img src="/img/endgame-logo.svg" alt="Endgame.ai" class="h-10 md:h-14 mx-auto" />
+          <img :src="assetUrl('/img/endgame-logo.svg')" alt="Endgame.ai" class="h-10 md:h-14 mx-auto" />
         </a>
         <h2 class="section-heading mb-6">
           Chess, Rebuilt from<br class="hidden md:block" /> the Ground Up
@@ -107,3 +107,7 @@
     </div>
   </section>
 </template>
+
+<script setup>
+const { assetUrl } = useBaseUrl()
+</script>

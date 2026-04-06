@@ -9,7 +9,7 @@
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-5xl mx-auto">
         <div class="flex justify-center">
           <div class="w-full max-w-sm rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-primary/5">
-            <img src="/img/hans-chess-portrait.jpg" alt="Hans Niemann — Chess Grandmaster and founder of Endgame.ai" class="w-full h-auto" />
+            <img :src="assetUrl('/img/hans-chess-portrait.jpg')" alt="Hans Niemann — Chess Grandmaster and founder of Endgame.ai" class="w-full h-auto" />
           </div>
         </div>
 
@@ -57,3 +57,7 @@
     </div>
   </section>
 </template>
+
+<script setup>
+const { assetUrl } = useBaseUrl()
+</script>
