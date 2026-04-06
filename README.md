@@ -1,35 +1,52 @@
 # eg-gm-hans — gmhans.com
 
-Hans Niemann / Endgame.ai SEO website built with Nuxt 3 (SSR) + Tailwind CSS.
+Hans Niemann / Endgame.ai SEO website. Nuxt 3 static site (pre-rendered) served by nginx.
 
 ## Running locally
 
 ```bash
 npm install
-npm run dev       # http://localhost:3000
-npm run build     # production build
-node .output/server/index.mjs  # run production server
+npm run dev          # dev server at http://localhost:3000
+npm run generate     # build static site to .output/public
+npx serve .output/public  # preview production build
+```
+
+## Architecture
+
+Static site generated at build time (`nuxt generate`). Nginx serves pre-rendered HTML files directly — no Node.js in the request path. Handles high traffic on a single instance.
+
+```
+Browser --> Nginx (port 80/443) --> .output/public/ (static HTML, CSS, JS, images)
+                |
+                +-- Let's Encrypt (certbot, auto-renew)
 ```
 
 ## AWS Resources (account 904233136251, us-east-1)
 
 | Resource | ID | Details |
 |---|---|---|
-| **EC2 Instance** | `i-09cd71f0320943d2d` | t3.small, Amazon Linux 2023, Name: `eg-gm-hans` |
-| **Elastic IP** | `eipalloc-052bd28e4bc510294` | `98.86.10.121` |
-| **Security Group** | `sg-048af8e1ea5e97096` | Name: `eg-gm-hans-sg` — ports 22, 80, 443 open |
-| **Key Pair** | `eg-gm-hans-key` | SSH key for EC2 access |
-| **EBS Volume** | (attached to instance) | 20 GB gp3 |
+| EC2 Instance | `i-09cd71f0320943d2d` | t3.medium, Amazon Linux 2023, Name: `eg-gm-hans` |
+| Elastic IP | `eipalloc-052bd28e4bc510294` | `98.86.10.121` |
+| Security Group | `sg-048af8e1ea5e97096` | Name: `eg-gm-hans-sg` — ports 22, 80, 443 |
+| Key Pair | `eg-gm-hans-key` | SSH key for EC2 access |
+| EBS Volume | (attached to instance) | 20 GB gp3 |
 
-## Server setup
+## DNS (managed on Wix)
 
-- **App**: Node.js 20, Nuxt 3 SSR running on port 3000 via systemd (`eg-gm-hans.service`)
-- **Reverse proxy**: nginx on port 80 → localhost:3000
+| Type | Host | Value |
+|---|---|---|
+| A | `@` | `98.86.10.121` |
+| A | `www` | `98.86.10.121` |
+
+## Server details
+
+- **OS**: Amazon Linux 2023
+- **Web server**: nginx serving static files from `/opt/eg-gm-hans/.output/public`
+- **HTTPS**: Let's Encrypt via certbot (auto-renews)
 - **Code location**: `/opt/eg-gm-hans`
-- **Systemd service**: `/etc/systemd/system/eg-gm-hans.service`
 - **Nginx config**: `/etc/nginx/conf.d/eg-gm-hans.conf`
 
-### Deploying updates
+## Deploying updates
 
 ```bash
 ssh -i ~/.ssh/eg-gm-hans-key.pem ec2-user@98.86.10.121
@@ -37,28 +54,14 @@ sudo su -
 cd /opt/eg-gm-hans
 git pull
 npm install
-npx nuxt build
-systemctl restart eg-gm-hans
+npx nuxt generate
+# nginx picks up new files automatically (same directory)
 ```
 
-## DNS records to set on Wix (gmhans.com)
-
-Set these **A records** in the Wix DNS manager:
-
-| Type | Host | Value | TTL |
-|---|---|---|---|
-| A | `@` | `98.86.10.121` | 3600 |
-| A | `www` | `98.86.10.121` | 3600 |
-
-After DNS propagates, the site will be live at http://gmhans.com.
-
-### HTTPS (future)
-
-Once DNS points to the EC2, install a free Let's Encrypt certificate:
+## Setting up HTTPS (after DNS points to EC2)
 
 ```bash
-sudo dnf install -y certbot python3-certbot-nginx
 sudo certbot --nginx -d gmhans.com -d www.gmhans.com
 ```
 
-This will auto-configure nginx for HTTPS with auto-renewal.
+Certbot auto-configures nginx for TLS and HTTP-to-HTTPS redirect, with auto-renewal.
