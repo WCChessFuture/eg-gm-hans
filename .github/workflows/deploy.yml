@@ -1,11 +1,12 @@
-name: Deploy to EC2
+name: Deploy
 
 on:
   push:
     branches: [main]
 
 jobs:
-  deploy:
+  deploy-ec2:
+    name: Deploy to EC2 (gmhans.com)
     runs-on: ubuntu-latest
     steps:
       - name: Deploy via SSH
@@ -15,3 +16,57 @@ jobs:
           username: ec2-user
           key: ${{ secrets.EC2_SSH_KEY }}
           script: sudo /opt/deploy-eg-gm-hans.sh
+
+  deploy-s3-test:
+    name: Deploy to S3 (test account)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Generate static site (baseURL /gmhans/)
+        run: npx nuxt generate
+        env:
+          NUXT_APP_BASE_URL: /gmhans/
+
+      - name: Sync to S3 (test)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_TEST }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_TEST }}
+          aws-region: us-east-1
+
+      - run: aws s3 sync .output/public s3://eg-gm-hans-static/gmhans --delete
+
+  deploy-s3-prod:
+    name: Deploy to S3 (prod account)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Generate static site (baseURL /gmhans/)
+        run: npx nuxt generate
+        env:
+          NUXT_APP_BASE_URL: /gmhans/
+
+      - name: Sync to S3 (prod)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_PROD }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_PROD }}
+          aws-region: us-east-1
+
+      - run: aws s3 sync .output/public s3://eg-gm-hans-static-prod/gmhans --delete
