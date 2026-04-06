@@ -17,8 +17,8 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: sudo /opt/deploy-eg-gm-hans.sh
 
-  deploy-s3-test:
-    name: Deploy to S3 (test account)
+  build-s3:
+    name: Build static site for S3
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -26,47 +26,51 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
 
-      - run: npm ci
+      - run: npm install
 
       - name: Generate static site (baseURL /gmhans/)
         run: npx nuxt generate
         env:
           NUXT_APP_BASE_URL: /gmhans/
 
-      - name: Sync to S3 (test)
-        uses: aws-actions/configure-aws-credentials@v4
+      - uses: actions/upload-artifact@v4
+        with:
+          name: static-site
+          path: .output/public
+
+  deploy-s3-test:
+    name: Deploy to S3 (test account)
+    needs: build-s3
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: static-site
+          path: public
+
+      - uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_TEST }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_TEST }}
           aws-region: us-east-1
 
-      - run: aws s3 sync .output/public s3://eg-gm-hans-static/gmhans --delete
+      - run: aws s3 sync public s3://eg-gm-hans-static/gmhans --delete
 
   deploy-s3-prod:
     name: Deploy to S3 (prod account)
+    needs: build-s3
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
+      - uses: actions/download-artifact@v4
         with:
-          node-version: 20
-          cache: npm
+          name: static-site
+          path: public
 
-      - run: npm ci
-
-      - name: Generate static site (baseURL /gmhans/)
-        run: npx nuxt generate
-        env:
-          NUXT_APP_BASE_URL: /gmhans/
-
-      - name: Sync to S3 (prod)
-        uses: aws-actions/configure-aws-credentials@v4
+      - uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_PROD }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_PROD }}
           aws-region: us-east-1
 
-      - run: aws s3 sync .output/public s3://eg-gm-hans-static-prod/gmhans --delete
+      - run: aws s3 sync public s3://eg-gm-hans-static-prod/gmhans --delete
