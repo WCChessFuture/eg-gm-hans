@@ -50,12 +50,18 @@ export default defineNuxtConfig({
 
   nitro: {
     prerender: {
-      routes: ['/sitemap.xml'],
+      failOnError: false,
+      crawlLinks: true,
+      routes: [
+        '/',
+        '/blog',
+        '/blog/story-hans-niemann-chess-platform',
+        '/blog/untold-chess-mates-everything-you-need-to-know',
+        '/blog/chess-platform-comparison-2026',
+        '/blog/play-like-hans-niemann',
+        '/blog/chess-ai-analysis-guide',
+        '/sitemap.xml',
+      ],
     },
-  },
-
-  routeRules: {
-    '/': { prerender: true },
-    '/blog/**': { prerender: true },
   },
 })
