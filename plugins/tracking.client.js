@@ -24,15 +24,6 @@ export default defineNuxtPlugin(() => {
         transport_type: 'beacon',
       })
     }
-
-    if (window.dataLayer) {
-      window.dataLayer.push({
-        event: 'cta_click',
-        cta_url: href,
-        cta_text: link.textContent?.trim().substring(0, 50) || '',
-        page_path: window.location.pathname,
-      })
-    }
   })
 
   if (window.gtag) {

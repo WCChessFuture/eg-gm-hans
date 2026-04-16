@@ -42,7 +42,7 @@ export default defineNuxtConfig({
           async: true,
         },
         {
-          innerHTML: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-S3T14S416Q',{linker:{domains:['endgame.ai','gmhans.com']},cookie_flags:'SameSite=None;Secure'});`,
+          innerHTML: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-S3T14S416Q');`,
           type: 'text/javascript',
         },
       ],
